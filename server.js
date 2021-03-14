@@ -1,6 +1,7 @@
 const express = require('express');
 const expressHandleBars = require('express-handlebars');
 const routing = require('./routes');
+const session = require('express-session');
 require('dotenv').config();
 
 //Express
@@ -15,9 +16,21 @@ server.use(express.json());
 
 server.set('viewDir', 'views'); //Templates Verzeichnis
 
-//Middleware
+//Middlewares
 //Pfad in dem die statischen Dateien liegen
 server.use(express.static(__dirname + '/public')); 
+//Session
+server.use(session({
+    secret: process.env.SESSION_SECRET || 'Please_SET_session_SeCreT',
+    resave: false,
+    saveUninitialized: true
+}));
+server.use((req, res, next) => {
+    //response.locals => Inhalt steht automatisch in allen Templates zur Verfügung
+    res.locals.isLoggedIn = req.session && req.session.isLoggedIn; //Global
+    console.log("Is loggedIn: " + res.locals.isLoggedIn);
+    next();
+});
 
 //Engine (HandleBars)
 //1. Parameter = Dateiendung

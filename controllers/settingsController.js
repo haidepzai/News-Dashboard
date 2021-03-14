@@ -14,7 +14,7 @@ const renderSettings = (req, res) => {
                     return {
                         value: categoryName,
                         label: categoryName,
-                        selected: categoryName === settings['news-api-category']
+                        selected: categoryName === settings['news-api-category'],
                     }
                 }),
             })
@@ -24,6 +24,8 @@ const renderSettings = (req, res) => {
 };
 
 const receiveSettings = (req, res) => {
+    //req.body um den body des Requests zu erhalten
+    //req.body geht nur mit Middleware body-parser    
     console.log(req.body); 
     settingService.writeSettings(req.body);
     //Client bekommt das zurück, was er abgeschickt hat

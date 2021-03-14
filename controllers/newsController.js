@@ -12,6 +12,7 @@ const renderHome = (req, res) => {
             message = 'Error when retrieving articles from NewsAPI';
         })
         .then(() => {
+            //1. Parameter bezieht sich auf den Templatenamen im Views Verzeichnis
             res.render('home',  {
                 title: 'News Page',
                 heading: 'Welcome to your news dashboard',
