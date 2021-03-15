@@ -2,11 +2,15 @@ const newsService = require('../services/newsService');
 
 //Controller:
 const renderHome = (req, res) => {
-    let articles = [],
-        message = '';      
+    let articles = [];
+    let message = ''; 
+    let description = [];     
+    let urlToImage = [];
 
         newsService.getNews().then(response => {
             articles = response.articles;
+            description = response.description;
+            urlToImage = response.urlToImage;
         })
         .catch(err => {
             message = 'Error when retrieving articles from NewsAPI';
@@ -18,6 +22,7 @@ const renderHome = (req, res) => {
                 heading: 'Welcome to your news dashboard',
                 homeActive: true,
                 articles,
+                description,
                 message
             });
         });

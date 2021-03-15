@@ -35,7 +35,21 @@ const receiveSettings = (req, res) => {
     renderSettings(req, res);
 }
 
+const setLanguage = (req, res) => {
+    const newSettings = {
+        'language': req.body.language
+    };
+    settingService.readSettings()
+        .then(settings => {
+            newSettings['news-api-key'] = settings['news-api-key']
+            newSettings['news-api-category'] = settings['news-api-category']
+            settingService.writeSettings(newSettings);
+        });
+    res.send(200);    
+}
+
 module.exports = {
     renderSettings,
-    receiveSettings
+    receiveSettings,
+    setLanguage
 }

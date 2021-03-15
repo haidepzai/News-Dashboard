@@ -1,20 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
 {{> head}}
 <body>
     {{> nav}}
-    <main>
-        <h1>{{heading}}</h1>
+    <div class="jumbotron jumbotron-fluid wrapper">
+        <h1 class="display-4 font-italic" style="text-align: center; color: white">{{heading}}</h1>
+        <button type="button" class="btn btn-info" onClick="save('de')">German</button>
+        <button type="button" class="btn btn-info" onClick="save('us')">English</button>
+    </div>
+    <div class="container">        
+        <main>
+            {{#if message}}
+            <p class="warning">
+                {{message}}
+            </p>
+            {{/if}}
 
-        {{#if message}}
-        <p class="warning">
-            {{message}}
-        </p>
-        {{/if}}
+            <div class="card-columns">
+                {{#each articles}}
+                <div class="card" >
+                   {{#if urlToImage}} <img src="{{urlToImage}}" alt="Card image cap" class="card-img-top">{{/if }} 
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ url }}" target="_blank">{{ title }}</a>
+                        </h5>
+                        <p class="card-text">{{description}}</p>
+                    </div>
+                </div>               
+                {{/each}}
+            </div>                
+        </main>
+    </div>
 
-        <ol>
-            {{#each articles}}
-            <li><a href="{{ url }}" target="_blank">{{ title }}</a></li>
-            {{/each}}
-        </ol>
-    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        
+        function save(language) {  
+            $.ajax({
+                type: "POST",
+                url: "/setLanguage",
+                data: {'language': language},
+                success: function() {   
+                    location.reload();  
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>

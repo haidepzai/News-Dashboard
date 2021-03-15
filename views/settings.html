@@ -1,33 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
 {{> head}}
 <body>
     {{> nav}}
-    <main>
-        <h1>{{heading}}</h1>
-    </main>
-
-    <div class="content-panel">
-        <form action="/settings" method="post">
-            <fieldset>
-                <h3></h3>
-                <p>
-                    <!-- name is wichtig für den req.body -->
-                    <label for="news-api-key" class="form-label">News API Key</label>
-                    <input type="text" class="text-input" id="news-api-key" name="news-api-key" value="{{ newsApiKey }}">
-                </p>
-                <p>
-                    <label for="news-api-category" class="form-label">News API Category</label>
-                    <select name="news-api-category" id="news-api-category">
-                        {{#each newsApiCategories}}
-                        <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
-                        {{/each}}
-                    </select>
-                </p>
-            </fieldset>
-
-            <fieldset>
-                <input type="submit" class="submit-button" value="Save">
-            </fieldset>
-        </form>
-    </div>
+    <div class="container">
+        <main>
+            <h1 class="display-4">{{heading}}</h1>
+        </main>
+    
+        <div class="card content-panel">
+            <div class="card-body">
+                <form action="/settings" method="post">
+                    <fieldset>
+                        <h3></h3>
+                        <div class="form-group">
+                            <p>
+                                <!-- name is wichtig für den req.body -->
+                                <label for="news-api-key" class="form-label">News API Key</label>
+                                <input type="text" class="form-control text-input" id="news-api-key" name="news-api-key" value="{{ newsApiKey }}" placeholder="Enter your News API Key">
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <label for="news-api-category" class="form-label">News API Category</label>
+                                <select name="news-api-category" id="news-api-category" class="form-control">
+                                    {{#each newsApiCategories}}
+                                    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+                                    {{/each}}
+                                </select>
+                            </p>
+                        </div>                        
+                    </fieldset>
+        
+                    <fieldset>
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </fieldset>
+                </form>
+            </div>            
+        </div>
+    </div>    
 </body>
 </html>

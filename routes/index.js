@@ -8,10 +8,12 @@ const authMiddleware = require('../middleware/authMiddleware');
 //Routes:
 router.get('/', newsController.renderHome);
 router.get('/home', newsController.renderHome);
+router.get('/test', newsController.renderHome);
 
 router.get('/admin', authMiddleware, settingsController.renderSettings);
 router.get('/settings', authMiddleware, settingsController.renderSettings);
 router.post('/settings', authMiddleware, settingsController.receiveSettings); //1. Wenn man das Formular abschickt
+router.post('/setLanguage', settingsController.setLanguage);
 
 router.get('/login', loginController.renderLogin);
 router.post('/login', loginController.submitLogin);

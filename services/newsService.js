@@ -8,6 +8,7 @@ const getNews = () => {
             return newsapi
                 .setApiKey(settings['news-api-key'] || process.env.NEWS_API_KEY || '')
                 .setCategory(settings['news-api-category'] || 'business') //default category: business
+                .setCountry(settings['language'] || 'de')
                 .send() //Inneres Promise
         }); //-> Am Ende wird der Wert nach außen transportiert: also die News
 

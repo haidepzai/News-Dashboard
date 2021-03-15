@@ -1,31 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
 {{> head}}
     <body>
         {{> nav}}
-        <main>
-            <h1>{{heading}}</h1>
-        </main>
-        <!-- name attribut wichtig für Server -->
-        <div class="content-panel">
-            {{#if loginFailed}}
-            <p class="warning">
-                Invalid username or password!
-            </p>
-            {{/if}}
+        <div class="container">
+            <main>
+                <h1 class="display-4">{{heading}}</h1>
+            </main>
+            <!-- name attribut wichtig für Server -->
+            <div class="card content-panel">
+                <div class="card-body">
+                    {{#if loginFailed}}
+                    <p class="alert alert-danger" role="alert">
+                        Invalid username or password!
+                    </p>
+                    {{/if}}
+        
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <p>
+                                <label for="username" class="form-label">Login</label>
+                                <input type="text" id="username" name="username" value="{{username}}" class="form-control" placeholder="Enter username">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Enter password" class="form-control">
+                            </p>
+                        </div>                 
+                        <p>
+                            <input type="submit" value="Login" class="btn btn-primary">
+                        </p>
+                    </form>
 
-            <form action="/login" method="post">
-                <p>
-                    <label for="username" class="form-label">Login</label>
-                    <input type="text" id="username" name="username" value="{{username}}">
-                </p>
-                <p>
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password">
-                </p>
-                <p>
-                    <input type="submit" value="Login">
-                </p>
-            </form>
-        </div>
-
+                </div>                
+            </div>
+        </div>       
     </body>
 </html>
